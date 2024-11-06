@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bola 8 mágica</title>
+  <style>
+
+    /* Fondo de la página */
+    body {
+      background-color: #001f3f; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    /* Estilo de la bola mágica */
+    .magic-ball {
+      background-color: black;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%; /* Hacerla circular */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.3);
+      position: relative;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Estilo del número 8 en la bola */
+    .eight-number {
+      position: absolute;
+      top: 10%;
+      font-size: 50px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Campo de entrada y botón */
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #0074D9; /* Azul */
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Respuesta de la Bola 8 Mágica */
+    #response {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #FFDC00; /* Amarillo para destacar */
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="magic-ball">
+    <div class="eight-number">8</div> <!-- Número 8 en la bola -->
+    <div class="input-container">
+      <!-- Campo de entrada para la pregunta del usuario -->
+      <input type="text" id="userQuestion" placeholder="Escribe tu pregunta aquí...">
+      <button onclick="askEightBall()">Preguntar</button>
+    </div>
+    <!-- Div donde se mostrarán las respuestas -->
+    <p id="response"></p>
+  </div>
+
+  <script>
+    function askEightBall() {
+      // Obtener la pregunta del usuario
+      let userQuestion = document.getElementById('userQuestion').value;
+      
+      // Verificar si hay una pregunta
+      if (userQuestion.trim() === '') {
+        document.getElementById('response').innerText = 'Por favor, escribe una pregunta.';
+        return;
+      }
+
+      // Generar un número aleatorio entre 0 y 7
+      var randomNumber = Math.floor(Math.random() * 8);
+
+      // Variable para almacenar la respuesta de la Bola 8
+      var eightBall = '';
+
+      // Asignar una respuesta según el número aleatorio
+      switch (randomNumber) {
+        case 0:
+          eightBall = 'Es seguro.';
+          break;
+        case 1:
+          eightBall = 'Definitivamente sí.';
+          break;
+        case 2:
+          eightBall = 'Respuesta confusa, intenta de nuevo.';
+          break;
+        case 3:
+          eightBall = 'No puedo predecirlo ahora.';
+          break;
+        case 4:
+          eightBall = 'No cuentes con ello.';
+          break;
+        case 5:
+          eightBall = 'Mis fuentes dicen que no.';
+          break;
+        case 6:
+          eightBall = 'La perspectiva no es buena.';
+          break;
+        case 7:
+          eightBall = 'Todo apunta a que sí.';
+          break;
+        default:
+          eightBall = 'Error: Respuesta desconocida.';
+      }
+
+      // Mostrar la respuesta en la página
+      document.getElementById('response').innerText = `La Bola 8 Mágica dice: ${eightBall}`;
+    }
+  </script>
+</body>
+</html>
