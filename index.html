@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bola 8 mágica</title>
   <style>
-
     /* Fondo de la página */
     body {
       background-color: #001f3f; 
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -21,26 +21,64 @@
     /* Estilo de la bola mágica */
     .magic-ball {
       background-color: black;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%; /* Hacerla circular */
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.3);
       position: relative;
-      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Círculo blanco para el número 8, ajustado para que aparezca más arriba 
+    .circle {
+      background-color: white;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 8%; /* Ajuste más hacia arriba 
+    }
+
+     Estilo del número 8 
+    .eight-number {
+      font-size: 50px;
+      color: black; /* Color negro para el número 8 
+      font-weight: bold;
+    }   
+
+    */
+
+    /* Triángulo azul oscuro para la respuesta */
+    .triangle {
+      position: absolute;
+      bottom: 40%;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 160px solid #001f3f; /* Color azul oscuro */
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
     }
 
-    /* Estilo del número 8 en la bola */
-    .eight-number {
+    /* Texto dentro del triángulo */
+    .triangle-text {
       position: absolute;
-      top: 10%;
-      font-size: 50px;
-      color: white;
+      top: 50px;
+      font-size: 16px;
+      color: #9acd32; /* Amarillo verdoso */
       font-weight: bold;
+      width: 80px;
+      text-align: center;
     }
 
     /* Campo de entrada y botón */
@@ -48,52 +86,53 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-top: 10px;
     }
 
     input[type="text"] {
       padding: 10px;
-      margin-top: 20px;
+      margin-top: 10px;
       border-radius: 5px;
       border: none;
       font-size: 16px;
       text-align: center;
+      width: 250px;
     }
 
     button {
       margin-top: 10px;
       padding: 10px 20px;
-      background-color: #0074D9; /* Azul */
+      background-color: hsl(273, 100%, 22%);
       border: none;
       border-radius: 5px;
       color: white;
       font-size: 16px;
       cursor: pointer;
     }
-
-    /* Respuesta de la Bola 8 Mágica */
-    #response {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #FFDC00; /* Amarillo para destacar */
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
   <div class="magic-ball">
-    <div class="eight-number">8</div> <!-- Número 8 en la bola -->
-    <div class="input-container">
-      <!-- Campo de entrada para la pregunta del usuario -->
-      <input type="text" id="userQuestion" placeholder="Escribe tu pregunta aquí...">
-      <button onclick="askEightBall()">Preguntar</button>
+    <!-- Círculo blanco con el número 8 en negro, ajustado más arriba -->
+    <div class="circle">
+      <div class="eight-number">8</div>
     </div>
-    <!-- Div donde se mostrarán las respuestas -->
-    <p id="response"></p>
+
+    <!-- Triángulo azul oscuro con la respuesta -->
+    <div class="triangle">
+      <p id="response" class="triangle-text"></p>
+    </div>
+  </div>
+
+  <!-- Contenedor de la entrada de pregunta y el botón -->
+  <div class="input-container">
+    <input type="text" id="userQuestion" placeholder="Escribe tu pregunta aquí...">
+    <button onclick="askEightBall()">Preguntar</button>
   </div>
 
   <script>
+    // Función que genera y muestra la respuesta de la bola 8 mágica
     function askEightBall() {
-      // Obtener la pregunta del usuario
       let userQuestion = document.getElementById('userQuestion').value;
       
       // Verificar si hay una pregunta
@@ -105,42 +144,28 @@
       // Generar un número aleatorio entre 0 y 7
       var randomNumber = Math.floor(Math.random() * 8);
 
-      // Variable para almacenar la respuesta de la Bola 8
-      var eightBall = '';
+      // Respuestas de la bola 8 mágica
+      var responses = [
+        'Es seguro.', 
+        'Definitivamente sí.', 
+        'Respuesta confusa, intenta de nuevo.', 
+        'No puedo predecirlo ahora.', 
+        'No cuentes con ello.', 
+        'Mis fuentes dicen que no.', 
+        'La perspectiva no es buena.', 
+        'Todo apunta a que sí.'
+      ];
 
-      // Asignar una respuesta según el número aleatorio
-      switch (randomNumber) {
-        case 0:
-          eightBall = 'Es seguro.';
-          break;
-        case 1:
-          eightBall = 'Definitivamente sí.';
-          break;
-        case 2:
-          eightBall = 'Respuesta confusa, intenta de nuevo.';
-          break;
-        case 3:
-          eightBall = 'No puedo predecirlo ahora.';
-          break;
-        case 4:
-          eightBall = 'No cuentes con ello.';
-          break;
-        case 5:
-          eightBall = 'Mis fuentes dicen que no.';
-          break;
-        case 6:
-          eightBall = 'La perspectiva no es buena.';
-          break;
-        case 7:
-          eightBall = 'Todo apunta a que sí.';
-          break;
-        default:
-          eightBall = 'Error: Respuesta desconocida.';
-      }
-
-      // Mostrar la respuesta en la página
-      document.getElementById('response').innerText = `La Bola 8 Mágica dice: ${eightBall}`;
+      // Mostrar la respuesta en el triángulo
+      document.getElementById('response').innerText = responses[randomNumber];
     }
+
+    // Agregar un evento para detectar cuando se presiona la tecla Enter en el campo de entrada
+    document.getElementById('userQuestion').addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        askEightBall(); // Llamar a la función cuando se presione Enter
+      }
+    });
   </script>
 </body>
 </html>
